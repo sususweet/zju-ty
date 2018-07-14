@@ -1,0 +1,50 @@
+
+{include file="common/header.html"}
+<div class="contentMain mt30">
+    {include file="common/left.html"}
+    <div class="list-right">
+    {include file="lib/positioncn.html"}
+        <div class="list-right-content calendarList">
+            <table width="99%" border="0" cellspacing="5" cellpadding="0" style="line-height:27px;">
+                <tr>
+                    <td align="center">
+                    今天是{$smarty.now|date_format:"%Y年%m月%d日"}&nbsp;&nbsp;
+                        <a href="redir.php?catalog_id={$catalog.id}&type=week">查询本周日历</a>&nbsp;&nbsp;
+                    <a href="redir.php?catalog_id={$catalog.id}&type=month">查询本月日历</a>&nbsp;&nbsp;
+                    查询更多日历请点击左侧日历
+                    </td>
+                </tr>
+            </table>
+            <table width="90%" border="0" align="center" cellpadding="0" cellspacing="5" style="line-height:27px;">
+                <tr>
+                    <th width="10%" height="20" align="left">事件分类:</th>
+                    <td width="10%"><a href="redir.php?catalog_id={$catalog.id}&type={$smarty.request.type}" {if $smarty.request.object==''} style="color:#FF0000"{/if}>全部</a></td>
+                    {sub_catalog_list catalog_id=150467 assign=rwos}
+                    {foreach from=$rwos item=r}
+                    <td width="10%"><a href="redir.php?catalog_id={$catalog.id}&object={$r.id}&type={$smarty.request.type}" {if $smarty.request.object==$r.id} style="color:#FF0000"{/if}>{$r.name}</a></td>
+                    {/foreach}
+                </tr>
+            </table>
+            {calendar_case_list assign=cal catalog_id=150467 object_id=$smarty.request.object}
+            {assign var=time value = $cal_current.stime}
+            <table width="90%" border="0" align="center" cellpadding="5" cellspacing="0" class="arrange">
+                {section name=week loop=$cal_current.days}
+                    <tr {if $smarty.now|date_format:"%Y-%m-%d"==$time|date_format:"%Y-%m-%d"}bgcolor="Bisque"{/if} >
+                        <th width="20%" align="center">
+                            {$time|date_format:"%Y-%m-%d"}<br/>
+                            星期{$time|date_format:"%w"|select:"WEEKDAY"}
+                        </th>
+                        <td width="80%">
+                            {foreach from=$cal_list.$time item=a}
+                            <div class="calendarArticle">·<a href="redir.php?catalog_id={$a.catalog}&object_id={$a.id}" title="" target="_blank">{$a.heading}</a>{$a.content}</div>
+                            {/foreach}
+                        </td>
+                    </tr>
+                { assign var="time" value=$time+86400}
+                {/section}
+            </table>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+</div>
+{include file="common/footer.html"}

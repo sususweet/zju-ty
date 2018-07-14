@@ -1,0 +1,14 @@
+<ul class="cg-news-list" id="arthd">
+	{assign var=h_cut value=40}
+    {if $params.h_cut}
+    	{assign var=h_cut value=$params.h_cut}
+    {/if} 
+    {assign var=date_format value="%Y-%m-%d"}
+    {if $params.date_format}
+    	{assign var=date_format value=$params.date_format}
+    {/if}
+	{foreach from=$art_list item=art}   
+   	<li><a {if $art.highlight==1 } class="highlight" {/if} {if $art.heading_color!=""||$art.b==1||$art.i==1||$art.u==1}style="{if $art.heading_color!=""}color:{$art.heading_color};{/if}{if $art.b==1}font-weight:bold;{/if}{if $art.i}font-style:italic;{/if}{if $art.u==1}text-decoration:underline;{/if}"{/if} href="{$art.url}" target="_blank" title="{$art.heading}">{$art.heading|cut:$h_cut}</a>
+    <span class="art-date">{$art.dt|date_format:$date_format}</span></li>
+    {/foreach}
+</ul>

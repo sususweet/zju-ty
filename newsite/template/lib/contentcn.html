@@ -1,0 +1,14 @@
+<div class="cg-content" id="contentcn">
+    {if $theArticle.supheading!=""}<h2 class="art-supheading">{$theArticle.supheading}</h2>{/if}
+    <h2 class="art-heading" {if $theArticle.heading_color!=""}style="color:{$theArticle.heading_color};"{/if}>{$theArticle.heading}</h2>
+    {if $theArticle.subheading!=""}<h2 class="art-subheading">&mdash;&mdash;{$theArticle.subheading}</h2>{/if}
+    <p class="art-summary">{if $theArticle.editor!=""}编辑：{$theArticle.editor}{/if} {if $theArticle.photographer!=""}摄影记者：{$theArticle.photographer}{/if} {if $theArticle.source!=""}来源：{$theArticle.source}{/if} {if $theArticle.author!=""}作者：{$theArticle.author}{/if} 时间：{$theArticle.dt|date_format:"%Y年%m月%d日"} 访问次数:{$theArticle.visitcount}</p>
+    <div class="art-content article-content">
+        {$theArticle.content}
+    </div>
+    {article_nav id=$theArticle.id assign=article direction=both}
+    <div class="pre-next">
+        <div class="pre-art">上一篇：{if $article.prev.id!=""}<a href="redir.php?catalog_id={$catalog.id}&object_id={$article.prev.id}" title="{$article.prev.heading}">{$article.prev.heading}</a>{else}没有了{/if}</div>
+        <div class="next-art">下一篇：{if $article.next.id!=""}<a href="redir.php?catalog_id={$catalog.id}&object_id={$article.next.id}" title="{$article.next.heading}">{$article.next.heading}</a>{else}没有了{/if}</div>
+    </div>
+</div>

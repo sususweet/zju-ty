@@ -1,0 +1,20 @@
+{if $articles_pages > 0 }
+<div class="cg-page" id="pagegoen">
+         <a href="{$catalog.id|catalog_url}">First</a>
+          { if $articles_page > 0 } 
+          <a href="{$catalog.id|catalog_url:$articles_page-1}">Prev</a>
+          {else}
+          Prev
+          {/if}
+          { if $articles_page < $articles_pages-1 }
+          <a href="{$catalog.id|catalog_url:$articles_page+1}" >Next</a>
+          {else}
+          Next
+          {/if} 
+          <a href="{$catalog.id|catalog_url:$articles_pages-1}">Last</a> <span class="current-page">Current : {$articles_page+1}/{$articles_pages} Pages</span>
+          <span class="go-page">
+          Goto <input name="page" type="text" id="page_num" class="page-num"/> page
+          <span class="go-button" onclick="javascript:var num=document.getElementById('page_num').value;if (typeof (parseInt(num)-1) =='number' &&(parseInt(num)-1)>=0) window.location.href='redir.php?catalog_id={$catalog.id}&page='+(parseInt(num)-1)">Go</span>
+          </span>
+</div>
+{ /if }

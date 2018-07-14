@@ -1,0 +1,38 @@
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td  ><form id="guestbook_search" name="guestbook_search" method="get" action="">
+        <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="kcxx">
+          <tr>
+            <td style="vertical-align:middle">
+			<label for="search" style="height:15px; line-height:15px;">¹Ø¼ü×Ö£º</label>
+              <input name="keyword" type="text" id="keyword" value="{$smarty.request.keyword|escape}" style="width:150px; background:#FFF; padding:0; border:1px #ccc solid;" />
+			<label for="search" style="height:15px; line-height:15px;">ÁôÑÔ±àºÅ£º</label>
+              <input name="bianhao" type="text" id="bianhao" value="{$smarty.request.bianhao|escape}" style="width:100px;background:#FFF; padding:0; border:1px #ccc solid;" />            
+			<input type="submit" name="button2" id="button2" value="ËÑË÷" />
+             <!-- <input name="cmd" type="hidden" id="cmd" value="search" />-->
+              <input name="postflag" type="hidden" id="postflag" value="1" />
+              <input name="catalog_id" type="hidden" id="catalog_id" value="{$catalog.id}" />
+              {if $catalog.id}
+              	{guestbook_list catalog_id=$catalog.id assign=cs count=100 verify_flag=0}
+                {assign var=sum value=0}
+                {foreach from=$cs item=c key=k}
+                	{assign var=ic value=$c.dt|strtotime}
+                    {assign var=time value=$smarty.now}
+                    {assign var=sc value=$time-$ic}
+                    {if $sc<=3600*24*1000 && $c.verify_flag==0}
+                        {assign var=sum value=2}
+                    {/if}
+                {/foreach}
+                {if $sum>0}*{/if}
+              {/if}
+              </td>
+            <td width="15%" align="right"> {if $channel==$catalog.id || $channel==0}
+              {assign var=edit_catalog value=$catalog.id}
+              {else}
+              {assign var=edit_catalog value=$channel}
+              {/if} <a style="color:#f00;font-weight:bold" href="redir.php?catalog_id={$catalog.id}&cmd=edit" class="guest_add_btn">ÎÒÒªÐ´ÐÅ</a></td>
+          </tr>
+        </table>
+      </form></td>
+  </tr>
+</table>

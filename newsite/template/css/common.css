@@ -1,0 +1,398 @@
+/* ͷ����ʽ */
+html,body{
+    width: 100%;
+    font-size: 14px;
+    font-family: "Arial", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+}
+.container{
+    width: 100%;
+    padding:21px 0 28px 0;
+    background: #003f88;
+}
+.contentMaint{
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.contentMain{
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.headMain{
+    width: 100%;
+}
+.logo{
+    float: left;
+    width: 27.17%;
+}
+.logo a img{
+    width: 100%;
+    height: auto;
+}
+.contentMaint .english a{
+    float: right;
+    color: white;
+    margin-right: 9px;
+    font-size: 12px;
+}
+.navt{
+    float: right;
+    display: block;
+}
+.navt .cg-navt{
+    padding-top: 18px;
+}
+.navt ul li{
+    float: left;
+    line-height: 34px;
+}
+.navt ul li:not(:nth-child(1)){
+    margin-left: 34px;
+}
+.navt ul li a{
+    color: white;
+    font-size: 14px;
+}
+.navt ul li a:hover{
+    color: #e9971e;
+}
+.navt .cg-navt{
+    float: left;
+}
+/* �����˵� */
+.navt .cg-navt .second-nav{
+   display: none;
+   padding:10px 0;
+   border-top: 2px solid #fea100;
+   left: -11px!important;
+   background:white;
+   z-index: 1000000;
+   box-shadow: 0px 2px 4px rgba(0, 0, 0, .3);
+}
+.navt .cg-navt .second-nav li{
+    float: none;
+    margin-left: 0;
+    width: 77px;
+    text-align: center;
+    line-height: 28px;
+}
+.navt .cg-navt .second-nav li a{
+    color: black;
+}
+.navt .cg-navt .second-nav li a:hover{
+    color: #ffaf3f;
+}
+
+/* �����˵� */
+.navt .cg-navt .third-nav{
+    display: none;
+}
+.navt .navBtn img{
+    width: 36px;
+    height: 36px;
+    position: absolute;
+    top: -10px;
+    right: 0;
+    display: none;
+}
+#search{
+    width: 143px;
+    height: 32px;
+    background:#3365a0;
+    float: right;
+    margin-top: 18px;
+    position: relative;
+    margin-left: 24px;
+}
+#search input{
+    width: 100px;
+    height: 32px;
+    color: white;
+    padding-left:12px;
+    background:#3365a0;
+}
+#search-bg{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 9px;
+    margin:  auto;
+    width: 21px;
+    height: 21px;
+    background:url("/newsite/template/images/search.png") no-repeat;
+}
+.backtop-button{
+    display: none;
+}
+@media  screen and (max-width:1200px){
+    .contentMaint{
+        padding:0 30px 0 30px;
+        margin: 0 auto;
+        box-sizing: border-box;
+    }
+    .logo a img{
+        width: 278px;
+     }
+}
+@media screen and (max-width:768px){
+    .navt{
+       float: none;
+       line-height: 34px;
+    }
+    .navt ul li:not(:nth-child(1)) {
+        margin-left: 29.5px;
+    }
+}
+@media screen and (min-width:700px){
+    .navt .cg-navt{
+        display: block!important;
+    }
+}
+@media screen and (max-width:700px){
+    .contentMaint{
+        padding:0 15px;
+        margin: 0 auto;
+        box-sizing: border-box;
+    }
+    /* ���ض��� */
+    .backtop-button{
+        width: 32px;
+        height: 32px;
+        position: fixed;
+        right: 20px;
+        bottom: 100px;
+        z-index: 1000000;
+        background: url("/newsite/template/images/backtop.png") no-repeat;
+    }
+    #search{
+        width: 143px;
+        height: 32px;
+        background:#3365a0;
+        float: right;
+        position: absolute;
+        top: 79px;
+        right: 0;
+        left: 0;
+        margin: auto;
+        border-radius: 6px;
+    } 
+    #search input{
+        border-radius: 6px;
+    }
+    .navt .cg-navt .second-nav{
+        position: static!important;
+        text-align: center;
+        width: 100%!important;
+    }
+    .navt .cg-navt .second-nav li{
+        width: 100%;
+    }
+    .navt{
+        float: none;
+        clear: both;
+    }
+    .navt .navBtn img{
+        display: block;
+    }
+    .navt .cg-navt{
+        /* display: none; */
+        position: absolute;
+        top: 120px;
+        width: 100%;
+        padding: 0;
+        text-align: center;
+    }
+    .navt ul li:not(:nth-child(1)){
+        margin-left: 0;
+    }
+    .navt ul li{
+        float: none;
+        padding: 6px 0;
+    }
+    .navt .navt-mask{
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 435px;
+        right: 0;
+        bottom: 0;
+        margin: 0 auto;
+        z-index: 200;
+        background: rgba(0, 0, 0, .7);
+    }
+    .logo a img{
+        display: block;
+        width: 150px;
+        clear: both;
+        padding-bottom: 10px;
+    }
+    #search{
+        width:240px;
+        height: 30px;
+        float: none;
+        clear: both;
+    }
+    #search input{
+        width: 190px;
+        height: 30px;
+    }
+    #search-bg{
+        background-size: 15px;
+        background-position-y: center;
+    }
+    .navBtn{
+        float: right;
+        position: absolute;
+        top: 26px;
+        right: 15px;
+        z-index: 2000000;
+     }
+    .contentMaint .english a{
+         display: none;
+     }
+    .navt .navBtn img{
+        width: 30px;
+        height: auto;
+    }
+    .container{
+        padding-bottom: 10px;
+    }
+}
+/* β����ʽ */
+.footer{
+    width: 100%;
+    background:#1c242e;
+}
+.footerMain{
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding:33px 0 30px 0;
+    background: url("/newsite/template/images/footerbg.png") no-repeat;
+}
+.footerMain .wechat{
+    width: 26.25%;
+}
+.footerMain .wechat #wechat-app,#wechat-bo,#wechat-xin{
+    float: left;
+    text-align: center;
+    width: 33.33%;
+}
+.footerMain .wechat .wechat-app,.wechat-bo,.wechat-xin{
+    color: white;
+    font-size: 14px;
+    line-height: 14px;
+    padding: 11px 0 18px 0;
+}
+.footerMain .wechat #wechat-app img{
+    width: 79px;
+    height: auto;
+}
+.footerMain .wechat #wechat-bo img{
+    width: 79px;
+    height: auto;
+}
+.footerMain .wechat #wechat-xin img{
+    width: 79px;
+    height: auto;
+}
+li{
+    list-style: none;
+}
+.footerMain .friend-link p{
+    color: white;
+    font-size: 14px;
+    line-height: 14px;
+    padding: 11px 15px 13px 15px;
+    box-sizing: border-box;
+}
+.footerMain .friend-link li{
+    padding-top: 7px;
+}
+.footerMain .friend-link li a{
+    font-size:14px;
+    color: white; 
+    line-height: 14px;
+}
+.footerMain .copyright-img img{
+    width: 232px;
+    height: auto;
+    float: right;
+}
+.footerMain .copyright .copyright-content{
+    text-align: right;
+    clear: both;
+}
+.footerMain .copyright-content{
+    font-size: 12px;
+    color: white;
+    padding-top: 22px;
+}
+.footerMain .copyright-content p{
+    padding-bottom: 3px;
+}
+.footerMain .wechat,.friend-link{
+    float: left;
+}
+.footerMain .friend-link{
+    width: 29.17%;
+    padding-left: 110px;
+    box-sizing: border-box;
+}
+.footerMain .copyright{
+    float: right;
+    width: 44.58%;
+}
+@media screen and (max-width:1200px){
+    .footerMain .wechat{
+        width: 40%;
+    }
+    .footerMain .friend-link{
+        width: 20%;
+        padding-left: 0;
+        box-sizing: border-box;
+    }
+    .footerMain .copyright{
+        width: 40%;
+    }
+    .footerMain{
+        width: 100%;
+        padding: 22px 30px 22px 30px;
+        box-sizing: border-box;
+    }
+}
+@media screen and (max-width:700px){
+    .footerMain .wechat,.friend-link{
+        float: none;
+    }
+    .footerMain .copyright{
+        float: none;
+        width: 100%;
+        text-align: center;
+    }
+    .footerMain .wechat{
+        width: 100%;
+    }
+    .footerMain .friend-link{
+        width: 100%;
+        text-align: center;
+    }
+    .footerMain .copyright-img img{
+        padding-top: 22px;
+        float: none;
+        width: 43.36%;
+    }
+    .footerMain .copyright .copyright-content{
+        float: none;
+        text-align: center;
+    }
+}
+.calendarList table {
+    width: 100%;
+    margin: 10px 0;
+}
+.calendarList .arrange td,.calendarList .arrange  th {
+    padding:5px;
+    border:1px solid #ccc;
+}

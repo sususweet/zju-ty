@@ -1,0 +1,53 @@
+{assign var=site_id value=150005}
+{if $catalog}
+	{catalog_detail catalog_id=$catalog.pcatalog assign=p_catalog}
+	{catalog_detail catalog_id=$p_catalog.pcatalog assign=pp_catalog}
+{/if}
+{sub_catalog_list catalog_id=$site_id assign=first_cat_list}
+{if $first_cat_list|@count >0}
+<ul class="cg-navt" id="navigation">
+	<li>
+		<a href="/newsite">Ê×Ò³</a>
+	</li>
+	{foreach from=$first_cat_list item=first_cat}
+	<li class="selected-navone" {if $catalog.id==$first_cat.id || $catalog.pcatalog==$first_cat.id || $p_catalog.pcatalog==$first_cat.id || $pp_catalog.pcatalog==$first_cat.id}class="nav-selected"{/if}>
+		<a href="{$first_cat.url}" >{$first_cat.name}</a>
+        {sub_catalog_list catalog_id=$first_cat.id assign=second_cat_list}
+		{if $second_cat_list|@count >0 && $first_cat.label_link!=1}
+			<ul class="second-nav" >
+			{foreach from=$second_cat_list item=second_cat}
+				<li {if $catalog.id==$second_cat.id || $catalog.pcatalog==$second_cat.id || $p_catalog.pcatalog==$second_cat.id || $pp_catalog.pcatalog==$second_cat.id}class="nav-selected"{/if}><a href="{$second_cat.url}" link="{$second_cat.link}">{$second_cat.name}</a>
+					{sub_catalog_list catalog_id=$second_cat.id assign=third_cat_list}
+					{if $third_cat_list|@count >0 && $second_cat.label_link!=1}
+						<ul class="third-nav">
+							{foreach from=$third_cat_list item=third_cat}
+								<li {if $catalog.id==$third_cat.id || $catalog.pcatalog==$third_cat.id || $p_catalog.pcatalog==$third_cat.id || $pp_catalog.pcatalog==$third_cat.id}class="nav-selected"{/if}><a href="{$third_cat.url}" link="{$third_cat.link}">{$third_cat.name}</a>
+									{sub_catalog_list catalog_id=$third_cat.id assign=fourth_cat_list}
+									{if $fourth_cat_list|@count >0 && $third_cat.label_link!=1}
+										<ul class="fourth-nav">
+										{foreach from=$fourth_cat_list item=fourth_cat}
+											<li {if $catalog.id==$fourth_cat.id}class="nav-selected"{/if}><a href="{$fourth_cat.url}" link="{$fourth_cat.link}">{$fourth_cat.name|cut:15}</a></li>
+										{/foreach}
+										</ul>
+									{/if}
+								</li>
+							{/foreach}
+						</ul>
+					{/if}
+				</li>
+			{/foreach}
+			</ul>
+		{/if}
+	</li>
+	{/foreach}
+</ul>
+{/if}
+{literal}
+<!-- <script type="text/javascript">
+try{
+	$(function(){
+		$(".cg-nav").cgMenu({parentClass:"parent-nav"});
+	});
+}catch(e){}
+</script> -->
+{/literal}

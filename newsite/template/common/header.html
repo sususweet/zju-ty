@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0">
+    <title>{if $catalog.id!=0}{$catalog.name} - {/if}浙江大学体艺部</title>
+    <link rel="stylesheet" href="/newsite/template/lib/css/cg.min.css">
+    <link rel="stylesheet" href="/newsite/template/css/reset.css">
+    <link rel="stylesheet" href="/newsite/template/css/common.css">
+    <link rel="stylesheet" href="/newsite/template/css/broadcast.css">
+</head>
+<body>
+    
+    <!-- 头部 -->
+    <header class="header{if !$catalog.id} headerFiexd{/if}" >
+        <div class="backtop-button">
+            <img src="/newsite/template/images/backtop.png" alt="">
+        </div>
+       <div class="container">
+            <div class="contentMaint ">
+                <div class="english clearfixa"><a href="###">English</a></div>
+                <div class="headMain clearfixa">
+                    <div class="logo">
+                        <a href="/newsite">
+                            <img src="/newsite/template/images/logo.png" alt="logo" />
+                        </a>
+                    </div>
+                    
+                    <nav class="navt">
+                        <div class="navBtn" id="navBtn">
+                            <img src="/newsite/template/images/nabBtnBg.png" alt="">
+                        </div>
+                        <div class="clearfixa navt-mask">
+                            <div id="search">
+                                <input type="text">
+                                <div id="search-bg"></div>
+                            </div>
+                            {include file="./lib/navigation.html"}
+                        </div>
+                    </nav>
+                </div>
+            </div>
+       </div>
+    </header>
+    

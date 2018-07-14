@@ -1,0 +1,55 @@
+{catalog_channel catalog_id=$catalog.id assign=channel}
+{assign var=cat_id value=$channel}
+{catalog_detail catalog_id=$catalog.pcatalog assign=p_catalog}
+{catalog_detail catalog_id=$p_catalog.pcatalog assign=pp_catalog}
+{if $channel == 0}{assign var=cat_id value=$catalog.pcatalog}{/if}
+{sub_catalog_list catalog_id=$cat_id assign=first_cat_list}
+{if $first_cat_list|@count >0}
+<ul class="cg-catalog" id="catalog_1">
+	{foreach from=$first_cat_list item=first_cat}
+	<li>
+		<span {if $catalog.id==$first_cat.id || $catalog.pcatalog==$first_cat.id || $p_catalog.pcatalog==$first_cat.id || $pp_catalog.pcatalog==$first_cat.id}class="cat-selected"{/if}><a href="{$first_cat.url}" link="{$first_cat.link}">{$first_cat.name}</a></span>		
+        {sub_catalog_list catalog_id=$first_cat.id assign=second_cat_list} 
+		<ul class="second-catalog{if $catalog.id==$first_cat.id || $catalog.pcatalog==$first_cat.id || $p_catalog.pcatalog==$first_cat.id || $pp_catalog.pcatalog==$first_cat.id} show{else} hide{/if}" >
+		{foreach from=$second_cat_list item=second_cat}
+			<li><span {if $catalog.id==$second_cat.id || $catalog.pcatalog==$second_cat.id || $p_catalog.pcatalog==$second_cat.id || $pp_catalog.pcatalog==$second_cat.id}class="cat-selected"{/if}><a href="{$second_cat.url}" link="{$second_cat.link}">{$second_cat.name}</a></span>
+				{sub_catalog_list catalog_id=$second_cat.id assign=third_cat_list}
+				<ul class="third-catalog{if $catalog.id==$second_cat.id || $catalog.pcatalog==$second_cat.id || $p_catalog.pcatalog==$second_cat.id || $pp_catalog.pcatalog==$second_cat.id} show{else} hide{/if}">
+					{foreach from=$third_cat_list item=third_cat}
+						<li><span {if $catalog.id==$third_cat.id || $catalog.pcatalog==$third_cat.id || $p_catalog.pcatalog==$third_cat.id || $pp_catalog.pcatalog==$third_cat.id}class="cat-selected"{/if}><a href="{$third_cat.url}" link="{$third_cat.link}">{$third_cat.name}</a></span>
+							{sub_catalog_list catalog_id=$third_cat.id assign=fourth_cat_list}
+							<ul class="fourth-catalog{if $catalog.id==$third_cat.id || $catalog.pcatalog==$third_cat.id || $p_catalog.pcatalog==$third_cat.id || $pp_catalog.pcatalog==$third_cat.id} show{else} hide{/if}">
+							{foreach from=$fourth_cat_list item=fourth_cat}
+								<li><span {if $catalog.id==$fourth_cat.id}class="cat-selected"{/if}><a href="{$fourth_cat.url}" link="{$fourth_cat.link}">{$fourth_cat.name|cut:15}</a></span></li>
+							{/foreach}
+							</ul>
+						</li>
+					{/foreach}
+				</ul>
+			</li>
+		{/foreach}
+		</ul>
+	</li>
+	{/foreach}
+</ul>
+{/if}
+{literal}
+<script type="text/javascript">
+try{
+	$(function(){
+		$("#catalog_1 span").click(function(){
+			if(!$(this).hasClass("cat-selected")){
+				$(this).addClass("cat-selected");
+				$(this).next("ul").removeClass("hide");				
+			}else{
+				$(this).removeClass("cat-selected");
+				$(this).next("ul").addClass("hide");				
+			}
+			if($(this).next("ul").children("li").length>=1){
+				return false;
+			}
+		});
+	});
+}catch(e){}
+</script>
+{/literal}

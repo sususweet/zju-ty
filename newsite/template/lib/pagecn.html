@@ -1,0 +1,16 @@
+{if $articles_pages > 0 }
+<div class="cg-page" id="pagecn">
+	<a href="{$catalog.id|catalog_url}">第一页</a>
+	{ if $articles_page > 0 } 
+	<a href="{$catalog.id|catalog_url:$articles_page-1}">上一页</a>
+	{else}
+	上一页
+	{/if}
+	{ if $articles_page < $articles_pages-1 }
+	<a href="{$catalog.id|catalog_url:$articles_page+1}" > 下一页</a>
+	{else}
+	下一页
+	{/if} 
+	<a href="{$catalog.id|catalog_url:$articles_pages-1}"> 尾页</a> 	<span class="current-page">当前：{$articles_page+1}/{$articles_pages} 页</span>
+</div>
+{ /if }

@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>{$catalog.name} - 浙江大学XXX</title>
+</head>
+<body>
+	<div class="guest_list">
+	 {include file='guestbook/guestbook_search.inc.html'} <br/> 
+	    <table id="guest_list_tbl"  width="100%" align="center" cellpadding="0" cellspacing="0">
+		  <tr bgcolor="#CBE5F1" height="26">
+			<th width="17%" style="border:1px #7DBFDD solid; border-right:none;">编号</th>
+			<th width="40%" style="border:1px #7DBFDD solid; border-right:none;">标题</th>
+			<th width="22%" style="border:1px #7DBFDD solid; border-right:none;">点击数</th>
+			<th width="21%" style="border:1px #7DBFDD solid">发表时间</th>
+		  </tr>
+		  {assign var=keyword value=$smarty.request.keyword|escape}
+		  {assign var=bianhao value=$smarty.request.bianhao|escape}
+		  {assign var=page value=$smarty.request.page|escape}
+		  {guestbook_list catalog_id=$catalog.id keyword=$keyword bianhao=$bianhao assign=as  count=10 page=$page}
+		  {assign var=num value=1}
+		  {foreach from=$as item=b}
+		  <tr height="26" {if $num%2==0}class="odd"{/if} >
+		  <td align="left" style="border:1px #7DBFDD solid; border-top:none; border-right:none; line-height:20px; padding-left:5px;">{$b.bianhao}</td>
+			<td align="left"style="border:1px #7DBFDD solid; border-top:none; border-right:none;"><a href="redir.php?catalog_id={$b.col}&cmd=content&object_id={$b.id}" target="_blank" style="font-weight:bold;">{$b.title|cut:36}</a></td> 
+		   <!--<td align="center" style="border:1px #7DBFDD solid; border-top:none; border-right:none;">{$b.hfs}</td>-->
+			<td align="center" style="border:1px #7DBFDD solid; border-top:none; border-right:none;">{$b.visit_count}</td>
+			<td align="center" style="border:1px #7DBFDD solid; border-top:none;">{$b.dt|date_format:'%Y-%m-%d'}</td>
+		  </tr>
+		  {assign var=num value=$num+1}
+		  {/foreach}
+		  {if $as_pages}
+		  <tr>
+			<td height="25" colspan="5" align="center"> {assign var=articles_catalog value=$catalog.id}
+			  { if $as_pages > 0 } <a href="redir.php?catalog_id={$catalog.id}&object_id={$guestbook.id}&amp;page=0" >第一页</a> { if $page-1 >= 0 } <a href="redir.php?catalog_id={$catalog.id}&object_id={$guestbook.id}&amp;page={$page-1}">上一页</a>{else}<span style="color:#999">上一页</span>{/if}  { if $page+1 < $as_pages } <a href="redir.php?catalog_id={$catalog.id}&object_id={$guestbook.id}&amp;page={$page+1}" > 下一页</a>{else}<span style="color:#999">下一页</span>{/if} <a href="redir.php?catalog_id={$catalog.id}&object_id={$guestbook.id}&amp;page={$as_pages-1}" > 最后页</a> 当前 {$page+1}/{$as_pages} 页  共 {$as_count} 条
+			  { /if }</td>
+		  </tr> 
+		  {/if}
+		</table>
+	</div>
+				
+</body>
+</html>
+

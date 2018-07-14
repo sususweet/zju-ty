@@ -1,0 +1,72 @@
+<footer class="footer">
+    <div class=" footerMain clearfixa">
+        <div class="wechat clearfixa">
+            <div id="wechat-app">
+                <p class="wechat-app">{article_detail id=150101 assign=article}{$article.heading}</p>
+                {article_detail id=150101 assign=article}{$article.content}
+            </div>
+            <div id="wechat-bo">
+                <p class="wechat-bo">{article_detail id=150103 assign=article}{$article.heading}</p>
+                {article_detail id=150103 assign=article}{$article.content}
+            </div>
+            <div id="wechat-xin">
+                <p class="wechat-xin">{article_detail id=150105 assign=article}{$article.heading}</p>
+                {article_detail id=150105 assign=article}{$article.content}
+            </div>
+        </div>
+        <div class="friend-link">
+            <p>”—«È¡¥Ω”</p>
+            {article_list catalog_id=272 assign=articles}
+            {foreach from=$articles item=col}
+            <li><a href="{$col.url}" target="_blank">--{$col.heading}</a></li>
+            {/foreach}
+        </div>
+        <div class="copyright clearfixa">
+            <div class="copyright-img">
+                <img src="/newsite/template/images/minlogo.png" alt="–°logo">
+            </div>
+            <div class="copyright-content">
+                {customize_page catalog_id=293 assign=content}{$content.content} 
+            </div>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
+<script src="/newsite/template/lib/js/jquery.min.js"></script>
+<script src="/newsite/template/lib/js/cg.min.js"></script>
+<script src="/newsite/template/js/commonnew.js"></script>
+<script src="/newsite/template/js/broadcast.js"></script>
+{calendar_onday_list catalog_id=150467 assign=as}
+<script>
+    var dayListStr = "{foreach from=$as item=a key=k}{$a.day}{if $k<$as|@count-1},{/if}{/foreach}";
+    { literal }
+    $(function(){
+        var dayList =dayListStr.split(",");
+        $(".days a").each(function(){
+            var year = $(this).attr("year");
+            var month = parseInt($(this).attr("month"))+1;
+            var day = parseInt($(this).attr("day"));
+            month = month>=10?month:'0'+month;
+            day = day>=10?day:'0'+day;
+            var date = year+"/"+month+"/"+day;
+            if(indexOf(dayList,date)>=0){
+                $(this).attr("href",'redir.php?catalog_id=150467&type=week&year='+year+'&month='+month+'&day='+day);
+                $(this).addClass('hasEvent');
+            }
+        })
+        function indexOf(array,value){
+            for (let index = 0; index < array.length; index++) {
+                const element = array[index];
+                if(element === value) {
+                    return index;
+                }
+            }
+            return -1;
+        }
+    })
+    { /literal }
+</script>
+
+
+

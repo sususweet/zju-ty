@@ -1,0 +1,64 @@
+<project name="front-end" default="make">
+	<property name="output" value="../output"/>
+	<property name="source" value="../source"/>
+	<property name="tmp" value="./tmp"/>
+	<property environment="env"/>
+	<property name="yuicompressor" value="${env.yuicompressor}"/>
+	
+	
+	<target name="make" depends="make_without_tpl,make_with_tpl">
+	</target>
+	<target name="compress_css" depends="clean,init">
+		<concat destfile="${output}/css/cg.css">
+			<fileset dir="${source}/css" includes="*.css" />
+		</concat>
+        <java jar="${yuicompressor}" fork="true" failonerror="true">
+            <arg line="--type css --charset gbk ${output}/css/cg.css -o ${output}/css/cg.min.css" />
+        </java>
+		<echo message="css minimized!"/>
+		<delete file="${output}/css/cg.css"/>
+	</target>
+	
+	<target name="compress_js" depends="clean,init">
+		<copy tofile="${output}/js/jquery.min.js" file="${source}/js/jquery.min.js"/>
+		<concat destfile="${output}/js/cg.js" encoding="gbk">
+			<fileset dir="${source}/js" includes="cg.core.js,cg.util.js,cg.ui.dialog.js" />
+			<fileset dir="${source}/js" includes="cg.ui.*.js, cg.webeffect.*.js" excludes="cg.ui.resize.js,cg.ui.drag.js,cg.ui.dialog.js" />
+		</concat>
+        <java jar="${yuicompressor}" fork="true" failonerror="true">
+            <arg line="--type js --charset gbk ${output}/js/cg.js -o ${output}/js/cg.min.js" />
+        </java>
+		<delete file="${output}/js/cg.js"/>
+		<echo message="js minimized!"/>
+	</target>
+	
+	<target name="make_without_tpl" depends="compress_js,compress_css">
+		<copy todir="${output}/images">
+			<fileset dir="${source}/images"/>
+		</copy>
+		<tar destfile="../frontend-${env.BUILD_ID}.tar.gz" compression="gzip">
+			<tarfileset prefix="lib" dir="${output}"></tarfileset>
+		</tar>
+	</target>
+
+	<target name="make_with_tpl" depends="make_without_tpl">
+		<copy todir="${output}">
+			<fileset dir="${source}">
+				<include name="*.html"/>
+			</fileset>
+		</copy>
+		<tar destfile="../frontend-tpl-${env.BUILD_ID}.tar.gz" compression="gzip">
+			<tarfileset prefix="lib" dir="${output}"></tarfileset>
+		</tar>
+	</target>
+		
+	<target name="clean">
+		<delete dir="${output}"/>
+	</target>
+	
+	<target name="init">
+		<mkdir dir="${output}"/>
+		<mkdir dir="${output}/css"/>
+		<mkdir dir="${output}/js"/>
+	</target>
+</project>

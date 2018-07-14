@@ -1,0 +1,235 @@
+
+{include file="./common/header.html"}
+<!-- <link rel="stylesheet" href="{$sitecfg.template_path}/css/index.css"> -->
+<div class="content-index clearfixa" >
+    <div class="indexpic-left">
+        <!-- 轮播图 -->
+        <div class="indexpic ">
+            <div class="pic-box ">
+                <div class="big-pic ">
+                    {article_list catalog_id=150198 count=4 assign=articles}
+                    {if $articles|@count>0}
+                    <ul>
+                        {foreach from=$articles item=col}
+                        {article_detail id=$col.id assign=article}
+                        <li>
+                            <div class="art-img">
+                                <a href="{$col.url}" title="{$col.heading}" target="_blank">
+                                    <img src="{$cfg.wescms_url}/sys/filebrowser/file.php?cmd=download&id={$article.picture_id}" alt="{$article.heading}">
+                                </a>
+                            </div>	
+                            <div class="pic-title">
+                                <img src="/newsite/template/images/right.png" alt="">
+                                <a href="{$col.url}" class="pic_title" title="" target="_blank">{$col.heading}</a><a href="{$col.url}"  target="_blank"><span>查看详情</span></a></div>
+                        </li>	
+                        {/foreach}			
+                    </ul>
+                    {/if}
+                </div>
+                <div class="small-pic"></div>
+            </div>
+        </div>
+        <!-- 新闻动态 -->
+        <div class="newst clearfixa">
+            {article_list catalog_id=150020 count=12 mode=date_desc assign=articles}
+            {if $articles|@count>0}
+            <div class="newst-change clearfixa">
+                <div class="newst-dynamic">新闻动态</div>
+                <div class="newst-new">NEWS</div>
+                {sub_catalog_list catalog_id=150013 show_position=1 assign=columns}
+                {foreach from=$columns item=col}
+                <div class="newst-more"><a href="{$col.url}" target="_blank">查看更多</a></div>
+                {/foreach}
+            </div>
+            <div class="newt-content ">
+                <ul>
+                    {assign var=date_format value="%Y-%m-%d"}
+                    {if $params.date_format}
+                        {assign var=date_format value=$params.date_format}
+                    {/if}
+                    {foreach from=$articles item=col}
+                    <li>
+                        <span class="newst-square baseLine"></span>
+                        <a href="{$col.url}" target="_blank">{$col.heading}</a><span class="newst-time">{$col.dt|date_format:$date_format}</span>
+                    </li>	
+                    {/foreach}			
+                </ul>  
+                {/if}       
+            </div>
+        </div>
+        <!-- 通知公告 -->
+        <div class="noticet clearfixa">
+            {sub_catalog_list catalog_id=150289 assign=columns}
+            <div class="noticet-change clearfixa">
+                <div class="noticet-dynamic">通知公告</div>
+                <div class="noticet-new">NOTICE</div>
+                <div class="noticet-more"><a href="redir.php?catalog_id=150290" target="_blank">查看更多</a></div>
+            </div>
+            <div class="noticet-list clearfixa">
+                <ul>
+                    <li class="noticet-yellow"><span class="noticet-blue">全部公告</span></li>
+                    {foreach from=$columns item=col}
+                    <li><span>{$col.name}</span></li>
+                    {/foreach}
+                </ul>
+            </div>
+            <div class="noticet-show">
+                <div class="noticet-all">
+                    <div class="noticet-content clearfixa">
+                        <ul>
+                            {article_list catalog_id=$columns count=10 with_catalog=1 mode=date_desc assign=articles}
+                            {assign var=date_format value="%Y-%m-%d"}
+                            {if $params.date_format}
+                                {assign var=date_format value=$params.date_format}
+                            {/if}
+                            {foreach from=$articles item=col}
+                            <li>
+                                <span class="noticet-square baseLine"></span><span class="noticet-catalog_name">{$col.catalog_name}</span>
+                                <a href="{$col.url}" target="_blank">{$col.heading}</a><span class="noticet-time">{$col.dt|date_format:$date_format}</span>
+                            </li>	
+                            {/foreach}			
+                        </ul>  
+                    </div>
+                </div>
+                {foreach from=$columns item=col}
+                <div class="noticet-all">
+                    {article_list catalog_id=$col.id with_catalog=1 count=10 mode=date_desc assign=articles}
+                    {if $articles|@count>0}
+                    <div class="noticet-content clearfixa">
+                            <ul>
+                                {assign var=date_format value="%Y-%m-%d"}
+                                {if $params.date_format}
+                                    {assign var=date_format value=$params.date_format}
+                                {/if}
+                                {foreach from=$articles item=col}
+                                <li>
+                                    <span class="noticet-square baseLine"></span><span class="noticet-catalog_name">{$col.catalog_name}</span>
+                                    <a href="{$col.url}" target="_blank">{$col.heading}</a><span class="noticet-time">{$col.dt|date_format:$date_format}</span>
+                                </li>	
+                                {/foreach}			
+                            </ul>  
+                        </div>
+                    {/if}
+                </div>
+                {/foreach}
+            </div>
+        </div>
+    </div>
+    <div class="indexpic-right">
+        <!-- 日历 -->
+        <div class="date5"></div>
+        <div class="goodcupt">
+            <div class="goodcupts clearfixa">
+                <ul>
+                    {sub_catalog_list catalog_id=150467 assign=columns}
+                    {foreach from=$columns item=col}
+                    <li>
+                        <span class="goodcupts-title">
+                        {$col.name}
+                        </span>
+                    </li>
+                    {/foreach}
+                </ul>
+            </div>
+            <div class="goodcupts-contents">
+                {foreach from=$columns item=col}
+                <div class="goodcupts-content">
+                    {calendar_selndays_list catalog_id=$col.id count=4 assign=articles}
+                    {assign var=date_format value="%m-%d"}
+                    {if $params.date_format}
+                        {assign var=date_format value=$params.date_format}
+                    {/if}
+                    <ul>
+                    {foreach from=$articles item=art}
+                    <li>
+                        <a href="redir.php?catalog_id={$col.id}&object_id={$art.id}" target="_blank">{$art.heading}</a><span>{$art.dt|date_format:$date_format}</span>
+                    </li>
+                    {/foreach}  
+                    </ul>
+                </div>
+                {/foreach}
+            </div>
+        </div>
+        <!-- 积分榜 -->
+        <div class="scoret">
+            {catalog_detail catalog_id=150392 assign=catalog}
+            <div class="scoret-more clearfixa">
+                <p>{$catalog.name}</p>
+                <p>INTEGRAL</p>
+                <p><a href="###">查看更多</a></p>
+            </div>
+            <div class="scoret-bg">
+                {sub_catalog_list catalog_id=150392 assign=columns}
+                <div id="scoret-scroll">
+                    <ul>
+                        {foreach from=$columns item=col}
+                        <li class="scoret-content scoret-one">
+                            <p><a href="{$col.url}" target="_blank">{$col.name}</a></p>
+                            <p>86</p>
+                        </li>
+                        {/foreach}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- 视频 -->
+        <div class="videot clearfixa">
+            {catalog_detail catalog_id=150399 assign=catalog}
+            <div class="videot-more clearfixa">
+                <p>{$catalog.name}</p>
+                <p>VIDEO</p>
+                <p><a href="###">查看更多</a></p>
+            </div>
+            <div class="videot-content">
+                <img src="/newsite/template/images/video.png" alt="精彩视频">
+            </div>
+        </div>
+        <!-- 信箱 -->
+        <div class="mailbox">
+            {catalog_detail catalog_id=150400 assign=catalog}
+            <div class="zhuren-mail baseLine">
+                <a href="{$catalog.url}" target="_blank"> <img src="/newsite/template/images/zhurenmail.png" alt="主任信箱"></a><a href="{$catalog.url}" target="_blank">{$catalog.name}</a>
+            </div>
+            {catalog_detail catalog_id=150401 assign=catalog}
+            <div class="zhuren-mail baseLine">
+                <a href="{$catalog.url}" target="_blank"> <img src="/newsite/template/images/qunzhongmail.png" alt="群众意见箱" ></a><a href="{$catalog.url}" target="_blank">{$catalog.name}</a>
+            </div>
+            {catalog_detail catalog_id=150402 assign=catalog}
+            <div class="zhuren-mail baseLine system">
+                <a href="{$catalog.url}" target="_blank"> <img src="/newsite/template/images/changguansystem.png" alt="场馆服务系统" ></a><a href="{$catalog.url}" target="_blank">{$catalog.name}</a>
+            </div>
+            {catalog_detail catalog_id=150403 assign=catalog}
+            <div class="zhuren-mail baseLine public">
+                <a href="{$catalog.url}" target="_blank"> <img src="/newsite/template/images/publicmessage.png" alt="公共体育立体化信息平台" ></a><a href="{$catalog.url}" target="_blank">{$catalog.name}</a>
+            </div>
+            {catalog_detail catalog_id=150404 assign=catalog}
+            <div class="zhuren-mail baseLine">
+                <a href="{$catalog.url}" target="_blank"> <img src="/newsite/template/images/sportmessage.png" alt="体育理论考试系统" ></a><a href="{$catalog.url}" target="_blank">{$catalog.name}</a>
+            </div>
+        </div>
+    </div>
+    <div class="scrollt-picture">
+        <div class="scrollt-change clearfixa">
+            <div class="scrollt-dynamic">新闻图片</div>
+            <div class="scrollt-new">NEWS PICTURE</div>
+        </div>
+        <div class="scrollt clearfixa">
+            <div id="scrollt">
+                {article_list catalog_id=150024 assign=articles}
+                {if $articles|@count>0}
+                <ul class="clearfixa">
+                    {foreach from=$articles item=col}
+                    {article_detail id=$col.id assign=article}
+                    <li><a href="{$col.url}" title="{$col.heading}" target="_blank"><img src="{$cfg.wescms_url}/sys/filebrowser/file.php?cmd=download&id={$article.picture_id}" alt="{$article.heading}"></a></li>
+                    {/foreach}
+                </ul>
+                {/if}
+            </div>
+            <div class="prev"><img src="/newsite/template/images/newsleft.png" alt=""></div>
+            <div class="next">
+                <img src="/newsite/template/images/newsright.png" alt="">
+            </div>
+        </div>
+    </div>
+</div>
+{include file="./common/footer.html"}

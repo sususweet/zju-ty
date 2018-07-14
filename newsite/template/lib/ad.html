@@ -1,0 +1,36 @@
+{article_list catalog_id=-1 count=100 assign=ad_list}<!--广告栏目ID-->
+{foreach from=$ad_list item=ad}
+	{article_detail id=$ad.id assign=ad_detail}
+	{if $ad_detail.supheading=="漂浮"}
+		{assign var=ad_type value="random"}
+	{elseif $ad_detail.supheading=="对联"}
+		{assign var=ad_type value="double"}
+	{elseif $ad_detail.supheading=="固定"}
+		{assign var=ad_type value="absolute"}
+	{/if}
+	<div class="cg-ad-{$ad_type}" type="{$ad_type}" arg="{$ad_detail.subheading}">
+		<div class="cg-ad-content">{$ad_detail.content}</div>
+	</div>
+{/foreach}
+{if $ad_list|@count >0}
+{literal}
+<script type="text/javascript"> 
+try{
+	$(function(){
+		$(".cg-ad-random").each(function(){			
+			var randomArg=$.extend({type:"random"},eval("({"+$(this).attr("arg")+"})"));
+			$(this).cgAd(randomArg);
+		});
+		$(".cg-ad-absolute").each(function(){
+			var absoluteArg=$.extend({type:"absolute"},eval("({"+$(this).attr("arg")+"})"));
+			$(this).cgAd(absoluteArg);
+		});
+		$(".cg-ad-double").each(function(){
+			var doubleArg=$.extend({type:"double"},eval("({"+$(this).attr("arg")+"})"));
+			$(this).cgAd(doubleArg);
+		});
+	});
+}catch(e){}
+</script>
+{/literal}
+{/if}

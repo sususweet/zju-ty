@@ -1,0 +1,30 @@
+<div class="list-left fl">
+    {catalog_channel catalog_id=$catalog.id assign=channel} 
+    {if $channel>0}
+        <div class="list-content">
+            {catalog_detail catalog_id=$channel assign=cd}
+            <h2 class="cat-title">
+                {$cd.name}
+                {if $cd.alias}
+                <span class="alias">/ {$cd.alias}</span>
+                {/if}
+            </h2>
+            <span class="cat-right"></span>
+        </div>
+        {include file="lib/catalog.html"} 
+    {else}
+    <div class="list-content">
+        {catalog_detail catalog_id=$catalog.id assign=cd}
+        <h2 class="cat-title">
+            {$cd.name}
+            {if $cd.alias}
+                <span class="alias">{$cd.alias}</span>
+            {/if}
+        </h2>
+        <span class="cat-right"></span>
+    </div>
+    {/if}
+    {if $catalog.id == 150467}
+    <div class="date5"></div>
+    {/if}
+</div>

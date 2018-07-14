@@ -1,0 +1,28 @@
+<ul class="cg-pic-news-list" id="artphs">
+	{assign var=h_cut value=18}
+    {if $params.h_cut}
+    	{assign var=h_cut value=$params.h_cut}
+    {/if}
+    {assign var=s_cut value=64}
+    {if $params.s_cut}
+    	{assign var=s_cut value=$params.s_cut}
+    {/if} 
+    {assign var=date_format value="%Y-%m-%d"}
+    {if $params.date_format}
+    	{assign var=date_format value=$params.date_format}
+    {/if}
+	{foreach from=$art_list item=art}   
+    <li>
+        <div class="art-img"><a href="{$art.url}"  title="{$art.heading}" target="_blank"><img src="wescms/sys/filebrowser/file.php?cmd=preview&id={$art.picture_id}" alt="{$art.heading}" /></a></div>
+        <h3 class="art-heading"><a {if $art.highlight==1 } class="highlight" {/if} {if $art.heading_color!=""||$art.b==1||$art.i==1||$art.u==1}style="{if $art.heading_color!=""}color:{$art.heading_color};{/if}{if $art.b==1}font-weight:bold;{/if}{if $art.i}font-style:italic;{/if}{if $art.u==1}text-decoration:underline;{/if}"{/if} href="{$art.url}" title="{$art.heading}" target="_blank">{$art.heading|cut:$h_cut}</a></h3>
+        <div class="art-summary">
+        {article_detail id=$art.id assign=art_detail}
+        {if $art.summary!=""}
+			{$art.summary|html2text|cut:$s_cut}
+        {else}
+        	{$art_detail.content|html2text|cut:$s_cut}
+        {/if}
+    	</div>
+    </li>
+    {/foreach}
+</ul>

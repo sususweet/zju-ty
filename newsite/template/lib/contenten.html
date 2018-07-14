@@ -1,0 +1,14 @@
+<div class="cg-content" id="contenten">
+    {if $theArticle.supheading!=""}<h2 class="art-supheading">{$theArticle.supheading}</h2>{/if}
+    <h2 class="art-heading"  {if $theArticle.heading_color!=""}style="color:{$theArticle.heading_color};"{/if}>{$theArticle.heading}</h2>
+    {if $theArticle.subheading!=""}<h2 class="art-subheading">&mdash;&mdash;{$theArticle.subheading}</h2>{/if}
+    <p class="art-summary">{if $theArticle.editor!=""}Editor:{$theArticle.editor}{/if} {if $theArticle.photographer!=""}Lensman:{$theArticle.photographer}{/if} {if $theArticle.source!=""}From:{$theArticle.source}{/if} {if $theArticle.author!=""}Author:{$theArticle.author}{/if} Date:{$theArticle.dt|date_format:"%Y-%m-%d"} Hits:{$theArticle.visitcount}</p>
+    <div class="art-content  article-content">
+        {$theArticle.content}
+    </div>
+    {article_nav id=$theArticle.id assign=article direction=both}
+    <div class="pre-next">
+        <div class="pre-art">PREV : {if $article.prev.id!=""}<a href="redir.php?catalog_id={$catalog.id}&object_id={$article.prev.id}" title="{$article.prev.heading}">{$article.prev.heading}</a>{else}No Article!{/if}</div>
+        <div class="next-art">NEXT : {if $article.next.id!=""}<a href="redir.php?catalog_id={$catalog.id}&object_id={$article.next.id}" title="{$article.next.heading}">{$article.next.heading}</a>{else}No Article!{/if}</div>
+    </div>
+</div>

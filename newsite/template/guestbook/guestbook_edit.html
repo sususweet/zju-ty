@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>{$catalog.name} - 浙江大学XXX</title>
+</head>
+<body>
+	<div>
+                	{include file='guestbook/guestbook_search.inc.html'}<br/> 
+		<form action="" method="post" name="guestbook"  id="guestbook" target="useloader">
+          <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+          <tr height="28">
+            <th width="90" align="right">反映人<font style="color:#F00">*</font>：</th>
+           <td colspan="3"><input type="text" name="name" id="name" /></td>
+          </tr>
+          <tr height="28">
+            <th align="right">联系电话<font style="color:#F00">*</font>：</th>
+            <td colspan="3"><input name="tele" type="text" id="tele" maxlength="100" /></td>
+          </tr>
+          <tr height="28">
+            <th align="right">电子邮箱：</th>
+            <td colspan="3"><input name="email" type="text" id="email" maxlength="100" /></td>
+          </tr>
+          <tr height="28">
+            <th align="right">单位/地址：</th>
+            <td colspan="3"><input name="contact" type="text" id="contact" maxlength="100" /></td>
+          </tr>
+          <tr height="28">
+            <th align="right">身份类别<font style="color:#F00">*</font>：</th>
+            <td colspan="3">
+            <select name="expression" id="expression">
+            	<option selected="selected">本科生</option>
+                <option>研究生</option>
+                <option>教职工</option>
+                <option>离退休</option>
+                <option>其他</option>
+                <option>成教生</option>
+                <option>访问学者</option>
+                <option>留学生</option>
+            </select>
+            </td>
+          </tr>
+          <tr height="28">
+           <th align="right">主题<font style="color:#F00">*</font>：</th>
+           <td colspan="3"><input name="title" type="text" id="title" size="30" maxlength="100" /></td>
+          </tr>
+          <tr>
+            <th align="right">意见和建议<font style="color:#F00">*</font>：</th>
+            <td colspan="3">
+               <textarea style="padding:5px" name="content" cols="50" rows="8" id="content"></textarea>
+			</td>
+          </tr>
+            <tr>
+                <th align="right">验证码<font style="color:#F00">*</font>：</th>
+                <td bgcolor="#FFFFFF">{php}require_once WESCMS_ROOT.'/api/encrypt.inc.php';{/php}
+                {init_checkcode assign=a}
+                  <input type="hidden" name="checkcode_encrypt" value="{$a}"/>
+                  <input type="text" name="checkcode"/>
+                  <img src="/wescms/checkcode.php?number={$a}" id="ci" name="ci" width="70" height="20" /> <a href="#" onclick="regenerateCheckcode()" class="xms_a">看不清？点击这里换一张</a>
+                </td>
+              </tr>
+          <tr height="28">
+            <th></th>
+            <td colspan="3"><input type="submit" name="submit" id="submit" value=" 提交留言 " />
+             <input name="postflag" type="hidden" id="postflag" value="1"/>
+			 <input name="col" type="hidden" id="col" value="{$catalog.id}"/></td>
+          </tr>
+        </table>
+		
+      </form>
+      <iframe name="useloader" frameborder="0" width="0" height="0"></iframe>
+    </div>
+
+</body>
+</html>
+

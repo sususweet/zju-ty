@@ -1,0 +1,20 @@
+{include file="common/header.html"}
+<div class="contentMain mt30">
+    {include file="common/left.html"}
+    <div class="list-right">
+    {include file="lib/positioncn.html"}
+        <div class="list-right-content">
+        {if $catalog.type == $smarty.const.CC_ARTICLE}
+            <div class="list">
+                {article_list catalog_id=$catalog.id page=$smarty.request.page calc_page=1 assign=art_list count=20 h_cut=100}
+                {include file="lib/arthd.html"}
+            </div>
+            {include file="lib/pagecn.html"}
+            {elseif $catalog.type== $smarty.const.CC_CUSTOMIZE}
+            <div class="cg-customize-content article-content">{customize_page catalog_id=$catalog.id assign=p}{$p.content}</div>
+            {/if}
+        </div>
+    </div>
+    <div style="clear:both"></div>
+</div>
+{include file="common/footer.html"}

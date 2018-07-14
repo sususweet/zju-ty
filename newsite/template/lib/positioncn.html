@@ -1,0 +1,8 @@
+<div class="cg-position" id="positioncn">
+	{assign var=id value=150005}<!--站点ID-->
+    {catalog_channel catalog_id=$catalog.id assign=channel}
+    {if $channel==-1}<!--无需显示的频道ID-->
+    	{assign var=id value=$channel}
+    {/if}
+    当前位置 : <a href="/newsite" title="首页">首页</a> > {current_position catalog_id=$catalog.id root_id=$id}
+</div>
